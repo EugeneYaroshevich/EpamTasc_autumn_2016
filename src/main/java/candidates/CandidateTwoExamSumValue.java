@@ -1,11 +1,10 @@
-package candidats;
+package candidates;
 
 import assessments.IntegerExamAssessment;
 
-import java.util.Comparator;
 import java.util.regex.Pattern;
 
-public class Candidate_1 extends Candidate {
+public class CandidateTwoExamSumValue extends Candidate {
 
     private final String WHOLE_ASSESSMENT_VALIDATE = "^[1-9]|10$";//1;2;3.....9;10
 
@@ -14,7 +13,7 @@ public class Candidate_1 extends Candidate {
     private IntegerExamAssessment firstExamAssessment;
     private IntegerExamAssessment secondExamAssessment;
 
-    public Candidate_1(String name, String surname, IntegerExamAssessment firstExamAssessment, IntegerExamAssessment secondExamAssessment) {
+    public CandidateTwoExamSumValue(String name, String surname, IntegerExamAssessment firstExamAssessment, IntegerExamAssessment secondExamAssessment) {
         setName(name);
         setSurname(surname);
         setFirstExamAssessment(firstExamAssessment);
@@ -61,7 +60,7 @@ public class Candidate_1 extends Candidate {
 
     @Override
     public String toString() {
-        return "Candidate_1{" +
+        return "CandidateTwoExamSumValue{" +
                 "name='" + getName() + '\'' +
                 ", surname='" + getSurname() + '\'' +
                 ", firstExamAssessment=" + getFirstExamAssessment().getValue() +
@@ -73,9 +72,9 @@ public class Candidate_1 extends Candidate {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Candidate_1)) return false;
+        if (!(o instanceof CandidateTwoExamSumValue)) return false;
 
-        Candidate_1 that = (Candidate_1) o;
+        CandidateTwoExamSumValue that = (CandidateTwoExamSumValue) o;
 
         if (WHOLE_ASSESSMENT_VALIDATE != null ? !WHOLE_ASSESSMENT_VALIDATE.equals(that.WHOLE_ASSESSMENT_VALIDATE) : that.WHOLE_ASSESSMENT_VALIDATE != null)
             return false;

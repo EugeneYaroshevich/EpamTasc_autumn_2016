@@ -2,7 +2,7 @@ package events;
 
 import assessments.IntegerExamAssessment;
 import assessments.TestAssessment;
-import candidats.Candidate_5;
+import candidates.CandidateTwoTestAndExam;
 import controls.Exam;
 import controls.Test;
 import exception.ControlEventException;
@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ControlEvent_5 implements ControlEvent<Candidate_5> {
+public class ControlEventTwoTestAndExam implements ControlEvent<CandidateTwoTestAndExam> {
 
     private String arg;
 
@@ -22,9 +22,9 @@ public class ControlEvent_5 implements ControlEvent<Candidate_5> {
     private Test firstTest;
     private Test secondTest;
     private Exam exam;
-    ArrayList<Candidate_5> candidates = new ArrayList();
+    ArrayList<CandidateTwoTestAndExam> candidates = new ArrayList();
 
-    public ControlEvent_5(String arg) throws ControlEventException {
+    public ControlEventTwoTestAndExam(String arg) throws ControlEventException {
         this.arg = arg;
     }
 
@@ -43,7 +43,7 @@ public class ControlEvent_5 implements ControlEvent<Candidate_5> {
             while (scanner.hasNext()) {
                 Scanner scannerCandidateLine = new Scanner(scanner.next());
                 scannerCandidateLine.useDelimiter(";");
-                candidates.add(new Candidate_5(scannerCandidateLine.next(), scannerCandidateLine.next(),
+                candidates.add(new CandidateTwoTestAndExam(scannerCandidateLine.next(), scannerCandidateLine.next(),
                         new TestAssessment(scannerCandidateLine.next(), firstTest),
                         new TestAssessment(scannerCandidateLine.next(), secondTest),
                         new IntegerExamAssessment(scannerCandidateLine.nextInt(), exam)));
@@ -66,13 +66,13 @@ public class ControlEvent_5 implements ControlEvent<Candidate_5> {
     }
 
     @Override
-    public ArrayList<Candidate_5> getValidateCandidates() {
+    public ArrayList<CandidateTwoTestAndExam> getValidateCandidates() {
 
-        ArrayList<Candidate_5> listValidateCandidates = new ArrayList<>();
+        ArrayList<CandidateTwoTestAndExam> listValidateCandidates = new ArrayList<>();
 
         if (candidates != null) {
 
-            for (Candidate_5 candidate : candidates) {
+            for (CandidateTwoTestAndExam candidate : candidates) {
 
                 if (candidate.getFirstTestAssessment().getValue().equals("сдан")
                         && candidate.getSecondTestAssessment().getValue().equals("сдан")
@@ -90,9 +90,9 @@ public class ControlEvent_5 implements ControlEvent<Candidate_5> {
     public void withdrawCandidate() throws ControlEventException {
 
         try {
-            ArrayList<Candidate_5> filterListCandidates = new ArrayList<>();
+            ArrayList<CandidateTwoTestAndExam> filterListCandidates = new ArrayList<>();
 
-            for (Candidate_5 candidate : this.candidates) {
+            for (CandidateTwoTestAndExam candidate : this.candidates) {
                 if (candidate.getExamAssessment().getValue() > 15) {
                     filterListCandidates.add(candidate);
                 }
@@ -114,14 +114,14 @@ public class ControlEvent_5 implements ControlEvent<Candidate_5> {
     @Override
     public void print(List listCollection) {
 
-        for (Iterator<Candidate_5> iterator = listCollection.iterator(); iterator.hasNext(); ) {
+        for (Iterator<CandidateTwoTestAndExam> iterator = listCollection.iterator(); iterator.hasNext(); ) {
             System.out.println(iterator.next());
         }
     }
 
-    Comparator<Candidate_5> candidateComparator = new Comparator<Candidate_5>() {
+    Comparator<CandidateTwoTestAndExam> candidateComparator = new Comparator<CandidateTwoTestAndExam>() {
         @Override
-        public int compare(Candidate_5 candidate_1, Candidate_5 candidate_2) {
+        public int compare(CandidateTwoTestAndExam candidate_1, CandidateTwoTestAndExam candidate_2) {
 
             return candidate_2.getExamAssessment().getValue() - candidate_1.getExamAssessment().getValue();
         }

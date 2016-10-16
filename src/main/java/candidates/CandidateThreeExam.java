@@ -1,11 +1,11 @@
-package candidats;
+package candidates;
 
 import assessments.DoubleExamAssessment;
 import assessments.IntegerExamAssessment;
 
 import java.util.regex.Pattern;
 
-public class Candidate_4 extends Candidate {
+public class CandidateThreeExam extends Candidate {
 
     private final String WHOLE_ASSESSMENT_VALIDATE = "^[1-9]|10$";//1;2;3.....9;10
     private final String HALF_ASSESSMENT_VALIDATE = "^\\d(\\.[05]?)|10$|^1\\d(\\.[05]?)|^20(\\.[0]?)$";//0;0.5;1;1.5.....19.5;20
@@ -17,7 +17,7 @@ public class Candidate_4 extends Candidate {
     private IntegerExamAssessment secondExamAssessment;
     private DoubleExamAssessment thirdExamAssessment;
 
-    public Candidate_4(String name, String surname, IntegerExamAssessment firstExamAssessment, IntegerExamAssessment secondExamAssessment, DoubleExamAssessment thirdExamAssessment) {
+    public CandidateThreeExam(String name, String surname, IntegerExamAssessment firstExamAssessment, IntegerExamAssessment secondExamAssessment, DoubleExamAssessment thirdExamAssessment) {
         setName(name);
         setSurname(surname);
         setFirstExamAssessment(firstExamAssessment);
@@ -79,7 +79,7 @@ public class Candidate_4 extends Candidate {
 
     @Override
     public String toString() {
-        return "Candidate_4{" +
+        return "CandidateThreeExam{" +
                 "name='" + getName() + '\'' +
                 ", surname='" + getSurname() + '\'' +
                 ", firstExamAssessment=" + getFirstExamAssessment().getValue() +
@@ -91,9 +91,9 @@ public class Candidate_4 extends Candidate {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Candidate_4)) return false;
+        if (!(o instanceof CandidateThreeExam)) return false;
 
-        Candidate_4 that = (Candidate_4) o;
+        CandidateThreeExam that = (CandidateThreeExam) o;
 
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;

@@ -1,4 +1,4 @@
-package candidats;
+package candidates;
 
 import java.io.Serializable;
 

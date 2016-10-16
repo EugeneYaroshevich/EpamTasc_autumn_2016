@@ -1,7 +1,7 @@
 package events;
 
 import assessments.IntegerExamAssessment;
-import candidats.Candidate_1;
+import candidates.CandidateTwoExamSumValue;
 import controls.Exam;
 import exception.ControlEventException;
 
@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ControlEvent_1 implements ControlEvent<Candidate_1> {
+public class ControlEventTwoExamSumValue implements ControlEvent<CandidateTwoExamSumValue> {
 
     private String arg;
 
@@ -19,10 +19,10 @@ public class ControlEvent_1 implements ControlEvent<Candidate_1> {
 
     private Exam firstExam;
     private Exam secondExam;
-    private ArrayList<Candidate_1> candidates = new ArrayList();
+    private ArrayList<CandidateTwoExamSumValue> candidates = new ArrayList();
 
 
-    public ControlEvent_1(String arg) throws ControlEventException {
+    public ControlEventTwoExamSumValue(String arg) throws ControlEventException {
         this.arg = arg;
     }
 
@@ -45,7 +45,7 @@ public class ControlEvent_1 implements ControlEvent<Candidate_1> {
                 Scanner scannerCandidateLine = new Scanner(scanner.next());
                 scannerCandidateLine.useDelimiter(";");
 
-                this.candidates.add(new Candidate_1(scannerCandidateLine.next(), scannerCandidateLine.next(),
+                this.candidates.add(new CandidateTwoExamSumValue(scannerCandidateLine.next(), scannerCandidateLine.next(),
                         new IntegerExamAssessment(scannerCandidateLine.nextInt(), firstExam),
                         new IntegerExamAssessment(scannerCandidateLine.nextInt(), secondExam)));
             }
@@ -58,13 +58,13 @@ public class ControlEvent_1 implements ControlEvent<Candidate_1> {
     }
 
     @Override
-    public ArrayList<Candidate_1> getValidateCandidates() {
+    public ArrayList<CandidateTwoExamSumValue> getValidateCandidates() {
 
-        ArrayList<Candidate_1> listValidateCandidates = new ArrayList<>();
+        ArrayList<CandidateTwoExamSumValue> listValidateCandidates = new ArrayList<>();
 
         if (this.candidates != null) {
 
-            for (Candidate_1 candidate : this.candidates) {
+            for (CandidateTwoExamSumValue candidate : this.candidates) {
 
                 if (candidate.getSumValues() >= this.passingScore) {
                     listValidateCandidates.add(candidate);
@@ -80,9 +80,9 @@ public class ControlEvent_1 implements ControlEvent<Candidate_1> {
     public void withdrawCandidate() throws ControlEventException {
 
         try {
-            ArrayList<Candidate_1> filterListCandidates = new ArrayList<>();
+            ArrayList<CandidateTwoExamSumValue> filterListCandidates = new ArrayList<>();
 
-            for (Candidate_1 candidate : this.candidates) {
+            for (CandidateTwoExamSumValue candidate : this.candidates) {
                 if (candidate.getMaxValue() > 15) {
                     filterListCandidates.add(candidate);
                 }
@@ -97,21 +97,21 @@ public class ControlEvent_1 implements ControlEvent<Candidate_1> {
     }
 
     @Override
-    public void sort(List<Candidate_1> listSort) {
+    public void sort(List<CandidateTwoExamSumValue> listSort) {
         Collections.sort(listSort, candidateComparator);
     }
 
     @Override
-    public void print(List<Candidate_1> listCollection) {
+    public void print(List<CandidateTwoExamSumValue> listCollection) {
 
-        for (Iterator<Candidate_1> iterator = listCollection.iterator(); iterator.hasNext(); ) {
+        for (Iterator<CandidateTwoExamSumValue> iterator = listCollection.iterator(); iterator.hasNext(); ) {
             System.out.println(iterator.next());
         }
     }
 
-    Comparator<Candidate_1> candidateComparator = new Comparator<Candidate_1>() {
+    Comparator<CandidateTwoExamSumValue> candidateComparator = new Comparator<CandidateTwoExamSumValue>() {
         @Override
-        public int compare(Candidate_1 candidate_1, Candidate_1 candidate_2) {
+        public int compare(CandidateTwoExamSumValue candidate_1, CandidateTwoExamSumValue candidate_2) {
 
             return candidate_2.getMaxValue() - candidate_1.getMaxValue();
         }

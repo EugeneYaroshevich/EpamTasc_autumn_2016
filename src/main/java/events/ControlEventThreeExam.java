@@ -1,7 +1,8 @@
 package events;
 
+import assessments.DoubleExamAssessment;
 import assessments.IntegerExamAssessment;
-import candidats.Candidate_2;
+import candidates.CandidateThreeExam;
 import controls.Exam;
 import exception.ControlEventException;
 
@@ -11,18 +12,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ControlEvent_2 implements ControlEvent<Candidate_2> {
+
+public class ControlEventThreeExam implements ControlEvent<CandidateThreeExam> {
 
     private String arg;
 
-    private int firstExamPassingScore;
-    private int secondExamPassingScore;
+    private double passingScore;
 
     private Exam firstExam;
     private Exam secondExam;
-    ArrayList<Candidate_2> candidates = new ArrayList();
+    private Exam thirdExam;
+    ArrayList<CandidateThreeExam> candidates = new ArrayList();
 
-    public ControlEvent_2(String arg) throws ControlEventException {
+    public ControlEventThreeExam(String arg) throws ControlEventException {
         this.arg = arg;
     }
 
@@ -41,11 +43,12 @@ public class ControlEvent_2 implements ControlEvent<Candidate_2> {
             while (scanner.hasNext()) {
                 Scanner scannerCandidateLine = new Scanner(scanner.next());
                 scannerCandidateLine.useDelimiter(";");
-
-                candidates.add(new Candidate_2(scannerCandidateLine.next(), scannerCandidateLine.next(),
+                candidates.add(new CandidateThreeExam(scannerCandidateLine.next(), scannerCandidateLine.next(),
                         new IntegerExamAssessment(scannerCandidateLine.nextInt(), firstExam),
-                        new IntegerExamAssessment(scannerCandidateLine.nextInt(), secondExam)));
+                        new IntegerExamAssessment(scannerCandidateLine.nextInt(), secondExam),
+                        new DoubleExamAssessment(scannerCandidateLine.nextDouble(), thirdExam)));
             }
+
         } catch (FileNotFoundException e) {
             throw new ControlEventException("File not found", e);
         } catch (IOException e) {
@@ -58,22 +61,20 @@ public class ControlEvent_2 implements ControlEvent<Candidate_2> {
         scannerFirstLine.useDelimiter(";");
         firstExam = new Exam(scannerFirstLine.next());
         secondExam = new Exam(scannerFirstLine.next());
-        firstExamPassingScore = scannerFirstLine.nextInt();
-        secondExamPassingScore = scannerFirstLine.nextInt();
-
+        thirdExam = new Exam(scannerFirstLine.next());
+        passingScore = scannerFirstLine.nextDouble();
     }
 
     @Override
-    public ArrayList<Candidate_2> getValidateCandidates() {
+    public ArrayList<CandidateThreeExam> getValidateCandidates() {
 
-        ArrayList<Candidate_2> listValidateCandidates = new ArrayList<>();
+        ArrayList<CandidateThreeExam> listValidateCandidates = new ArrayList<>();
 
         if (candidates != null) {
 
-            for (Candidate_2 candidate : candidates) {
+            for (CandidateThreeExam candidate : candidates) {
 
-                if (candidate.getFirstExamAssessment().getValue() >= firstExamPassingScore
-                        && secondExamPassingScore <= candidate.getFirstExamAssessment().getValue()) {
+                if (candidate.getSumValues() >= passingScore) {
                     listValidateCandidates.add(candidate);
                 }
             }
@@ -87,39 +88,45 @@ public class ControlEvent_2 implements ControlEvent<Candidate_2> {
     public void withdrawCandidate() throws ControlEventException {
 
         try {
-            ArrayList<Candidate_2> filterListCandidates = new ArrayList<>();
+            ArrayList<CandidateThreeExam> filterListCandidates = new ArrayList<>();
 
-            for (Candidate_2 candidate : this.candidates) {
+
+            for (CandidateThreeExam candidate : this.candidates) {
                 if (candidate.getMaxValue() > 15) {
                     filterListCandidates.add(candidate);
                 }
             }
             System.out.println("_______________________________________________________");
-            System.out.println(Collections.min(filterListCandidates, (a, b) -> a.getMaxValue() - b.getMaxValue()));
+            System.out.println(Collections.min(filterListCandidates, new Comparator<CandidateThreeExam>() {
+                @Override
+                public int compare(CandidateThreeExam o1, CandidateThreeExam o2) {
+                    return (int) (Math.ceil(o1.getMaxValue() - o2.getMaxValue()));
+                }
+            }));
         } catch (Exception e) {
             throw new ControlEventException("Нет таких кандидатов", e);
         }
     }
 
     @Override
-    public void sort(List<Candidate_2> listSort) {
+    public void sort(List listSort) {
 
         Collections.sort(listSort, candidateComparator);
     }
 
     @Override
-    public void print(List<Candidate_2> listCollection) {
+    public void print(List listCollection) {
 
-        for (Iterator<Candidate_2> iterator = listCollection.iterator(); iterator.hasNext(); ) {
+        for (Iterator<CandidateThreeExam> iterator = listCollection.iterator(); iterator.hasNext(); ) {
             System.out.println(iterator.next());
         }
     }
 
-    Comparator<Candidate_2> candidateComparator = new Comparator<Candidate_2>() {
+    Comparator<CandidateThreeExam> candidateComparator = new Comparator<CandidateThreeExam>() {
         @Override
-        public int compare(Candidate_2 candidate_1, Candidate_2 candidate_2) {
+        public int compare(CandidateThreeExam candidate_1, CandidateThreeExam candidate_2) {
 
-            return candidate_2.getMaxValue() - candidate_1.getMaxValue();
+            return (int) (Math.ceil(candidate_2.getMaxValue() - candidate_1.getMaxValue()));
         }
     };
 }

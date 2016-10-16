@@ -1,11 +1,11 @@
-package candidats;
+package candidates;
 
 import assessments.DoubleExamAssessment;
 import assessments.TestAssessment;
 
 import java.util.regex.Pattern;
 
-public class Candidate_3 extends Candidate {
+public class CandidateTwoExamAndTest extends Candidate {
 
     private final String HALF_ASSESSMENT_VALIDATE = "^[1-9](\\.[05]?)|10(\\.[0]?)$";//0;0.5;1;1.5.....9.5;10
 
@@ -15,7 +15,7 @@ public class Candidate_3 extends Candidate {
     private DoubleExamAssessment secondExamAssessment;
     private TestAssessment testAssessment;
 
-    public Candidate_3(String name, String surname, DoubleExamAssessment firstExamAssessment, DoubleExamAssessment secondExamAssessment, TestAssessment testAssessment) {
+    public CandidateTwoExamAndTest(String name, String surname, DoubleExamAssessment firstExamAssessment, DoubleExamAssessment secondExamAssessment, TestAssessment testAssessment) {
         setName(name);
         setSurname(surname);
         setFirstExamAssessment(firstExamAssessment);
@@ -80,7 +80,7 @@ public class Candidate_3 extends Candidate {
 
     @Override
     public String toString() {
-        return "Candidate_3{" +
+        return "CandidateTwoExamAndTest{" +
                 "name='" + getName() + '\'' +
                 ", surname='" + getSurname() + '\'' +
                 ", firstExamAssessment=" + getFirstExamAssessment().getValue() +
@@ -92,9 +92,9 @@ public class Candidate_3 extends Candidate {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Candidate_3)) return false;
+        if (!(o instanceof CandidateTwoExamAndTest)) return false;
 
-        Candidate_3 that = (Candidate_3) o;
+        CandidateTwoExamAndTest that = (CandidateTwoExamAndTest) o;
 
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;

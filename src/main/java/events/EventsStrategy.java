@@ -50,24 +50,24 @@ public class EventsStrategy<T extends ControlEvent> {
     }
 
 
-    private ControlEvent_1 getControlEvent_1(String arg) throws ControlEventException {
-        return new ControlEvent_1(arg);
+    private ControlEventTwoExamSumValue getControlEvent_1(String arg) throws ControlEventException {
+        return new ControlEventTwoExamSumValue(arg);
     }
 
-    private ControlEvent_2 getControlEvent_2(String arg) throws ControlEventException {
-        return new ControlEvent_2(arg);
+    private ControlEventTwoExamMaxValue getControlEvent_2(String arg) throws ControlEventException {
+        return new ControlEventTwoExamMaxValue(arg);
     }
 
-    private ControlEvent_3 getControlEvent_3(String arg) throws ControlEventException {
-        return new ControlEvent_3(arg);
+    private ControlEventTwoExamAndTest getControlEvent_3(String arg) throws ControlEventException {
+        return new ControlEventTwoExamAndTest(arg);
     }
 
-    private ControlEvent_4 getControlEvent_4(String arg) throws ControlEventException {
-        return new ControlEvent_4(arg);
+    private ControlEventThreeExam getControlEvent_4(String arg) throws ControlEventException {
+        return new ControlEventThreeExam(arg);
     }
 
-    private ControlEvent_5 getControlEvent_5(String arg) throws ControlEventException {
-        return new ControlEvent_5(arg);
+    private ControlEventTwoTestAndExam getControlEvent_5(String arg) throws ControlEventException {
+        return new ControlEventTwoTestAndExam(arg);
     }
 
 }

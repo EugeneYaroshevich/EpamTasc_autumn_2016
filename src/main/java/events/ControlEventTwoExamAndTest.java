@@ -2,7 +2,7 @@ package events;
 
 import assessments.DoubleExamAssessment;
 import assessments.TestAssessment;
-import candidats.Candidate_3;
+import candidates.CandidateTwoExamAndTest;
 import controls.Exam;
 import controls.Test;
 import exception.ControlEventException;
@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ControlEvent_3 implements ControlEvent<Candidate_3> {
+public class ControlEventTwoExamAndTest implements ControlEvent<CandidateTwoExamAndTest> {
 
     private String arg;
 
@@ -23,10 +23,10 @@ public class ControlEvent_3 implements ControlEvent<Candidate_3> {
     private Exam firstExam;
     private Exam secondExam;
     private Test test;
-    ArrayList<Candidate_3> candidates = new ArrayList();
+    ArrayList<CandidateTwoExamAndTest> candidates = new ArrayList();
 
 
-    public ControlEvent_3(String arg) throws ControlEventException {
+    public ControlEventTwoExamAndTest(String arg) throws ControlEventException {
         this.arg = arg;
     }
 
@@ -45,7 +45,7 @@ public class ControlEvent_3 implements ControlEvent<Candidate_3> {
             while (scanner.hasNext()) {
                 Scanner scannerCandidateLine = new Scanner(scanner.next());
                 scannerCandidateLine.useDelimiter(";");
-                candidates.add(new Candidate_3(scannerCandidateLine.next(), scannerCandidateLine.next(),
+                candidates.add(new CandidateTwoExamAndTest(scannerCandidateLine.next(), scannerCandidateLine.next(),
                         new DoubleExamAssessment(scannerCandidateLine.nextDouble(), firstExam),
                         new DoubleExamAssessment(scannerCandidateLine.nextDouble(), secondExam),
                         new TestAssessment(scannerCandidateLine.next(), test)));
@@ -69,13 +69,13 @@ public class ControlEvent_3 implements ControlEvent<Candidate_3> {
     }
 
     @Override
-    public ArrayList<Candidate_3> getValidateCandidates() {
+    public ArrayList<CandidateTwoExamAndTest> getValidateCandidates() {
 
-        ArrayList<Candidate_3> listValidateCandidates = new ArrayList<>();
+        ArrayList<CandidateTwoExamAndTest> listValidateCandidates = new ArrayList<>();
 
         if (candidates != null) {
 
-            for (Candidate_3 candidate : candidates) {
+            for (CandidateTwoExamAndTest candidate : candidates) {
 
                 if (candidate.getFirstExamAssessment().getValue() >= firstExamPassingScore
                         && candidate.getFirstExamAssessment().getValue() >= secondExamPassingScore
@@ -93,17 +93,17 @@ public class ControlEvent_3 implements ControlEvent<Candidate_3> {
     public void withdrawCandidate() throws ControlEventException {
 
         try {
-            ArrayList<Candidate_3> filterListCandidates = new ArrayList<>();
+            ArrayList<CandidateTwoExamAndTest> filterListCandidates = new ArrayList<>();
 
-            for (Candidate_3 candidate : this.candidates) {
+            for (CandidateTwoExamAndTest candidate : this.candidates) {
                 if (candidate.getMaxValue() > 15) {
                     filterListCandidates.add(candidate);
                 }
             }
             System.out.println("_______________________________________________________");
-            System.out.println(Collections.min(filterListCandidates, new Comparator<Candidate_3>() {
+            System.out.println(Collections.min(filterListCandidates, new Comparator<CandidateTwoExamAndTest>() {
                 @Override
-                public int compare(Candidate_3 o1, Candidate_3 o2) {
+                public int compare(CandidateTwoExamAndTest o1, CandidateTwoExamAndTest o2) {
                     return (int) (Math.ceil(o1.getMaxValue() - o2.getMaxValue()));
                 }
             }));
@@ -121,14 +121,14 @@ public class ControlEvent_3 implements ControlEvent<Candidate_3> {
     @Override
     public void print(List listCollection) {
 
-        for (Iterator<Candidate_3> iterator = listCollection.iterator(); iterator.hasNext(); ) {
+        for (Iterator<CandidateTwoExamAndTest> iterator = listCollection.iterator(); iterator.hasNext(); ) {
             System.out.println(iterator.next());
         }
     }
 
-    Comparator<Candidate_3> candidateComparator = new Comparator<Candidate_3>() {
+    Comparator<CandidateTwoExamAndTest> candidateComparator = new Comparator<CandidateTwoExamAndTest>() {
         @Override
-        public int compare(Candidate_3 candidate_1, Candidate_3 candidate_2) {
+        public int compare(CandidateTwoExamAndTest candidate_1, CandidateTwoExamAndTest candidate_2) {
 
             return (int) (Math.ceil(candidate_2.getMaxValue() - candidate_1.getMaxValue()));
         }

@@ -1,6 +1,6 @@
 package events;
 
-import candidats.Candidate;
+import candidates.Candidate;
 import exception.ControlEventException;
 
 import java.util.ArrayList;
